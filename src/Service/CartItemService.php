@@ -1,9 +1,9 @@
 <?php
 
-namespace Back\Service;
-use Back\Entities\Cart;
-use Back\Entities\Item;
-use Back\Entities\CartItem;
+namespace App\Service;
+use App\Entities\Cart;
+use App\Entities\Item;
+use App\Entities\CartItem;
 
 class CartItemService
 {

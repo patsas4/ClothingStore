@@ -1,8 +1,8 @@
 <?php
 
-namespace Back\Service;
-use Back\Entities\Customer;
-use Back\Entities\Order;
+namespace App\Service;
+use App\Entities\Customer;
+use App\Entities\Order;
 use DateTime;
 class OrderService
 {

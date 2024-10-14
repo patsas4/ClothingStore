@@ -1,7 +1,7 @@
 <?php
 
-namespace Back\Service;
-use Back\Entities\Customer;
+namespace App\Service;
+use App\Entities\Customer;
 class CustomerService
 {
     public static function createCustomer($enitityManager, string $firstName, string $lastName, string $email, string $password) 

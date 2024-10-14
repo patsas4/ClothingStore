@@ -1,8 +1,8 @@
 <?php
 
-namespace Back\Service;
-use Back\Entities\Cart;
-use Back\Entities\Customer;
+namespace App\Service;
+use App\Entities\Cart;
+use App\Entities\Customer;
 class CartService
 {
     public static function getCartByCustomerId($entityManager, int $customerId): Cart
