@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Service;
-use App\Entities\Category;
+use App\Entity\Category;
 class CategoryService
 {
     public static function getAllCategories($enitityManager)

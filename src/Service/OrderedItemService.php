@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Service;
-use App\Entities\OrderedItem;
-use App\Entities\Order;
-use App\Entities\Item;
+use App\Entity\OrderedItem;
+use App\Entity\Order;
+use App\Entity\Item;
 class OrderedItemService
 {
     public static function createOrderedItem($entityManager, Order $order, Item $item, int $quantity)

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Service;
-use App\Entities\Fit;
+use App\Entity\Fit;
 class FitService
 {
     public static function getAllFits($enitityManager)

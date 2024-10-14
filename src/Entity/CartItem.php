@@ -1,38 +1,27 @@
 <?php
 
-
-namespace App\Entities;
+namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name:"OrderedItem")]
-class OrderedItem {
+#[ORM\Table(name:"CartItem")]
+class CartItem {
     #[ORM\Id]
     #[ORM\GeneratedValue()]
     #[ORM\Column(type:"integer")]
-    private int $OrderedItemId;
-    #[ORM\ManyToOne(targetEntity: Order::class)]
-    #[ORM\JoinColumn(name: "OrderId", referencedColumnName:"OrderId")]
-    private Order $Order;
+    private int $CartItemId;
+    #[ORM\ManyToOne(targetEntity: Cart::class)]
+    #[ORM\JoinColumn(name:"CartId", referencedColumnName:"CartId")]
+    private Cart $Cart;
     #[ORM\ManyToOne(targetEntity: Item::class)]
-    #[ORM\JoinColumn(name: "ItemId", referencedColumnName:"ItemId")]
+    #[ORM\JoinColumn(name:"ItemId", referencedColumnName:"ItemId")]
     private Item $Item;
     #[ORM\Column(type:"integer")]
     private int $Quantity;
 
-    public function getOrderedItemId(): int 
+    public function getCartItemId(): int 
     {
-        return $this->OrderedItemId;
-    }
-
-    public function setOrder(Order $Order): void
-    {
-        $this->Order = $Order;
-    }
-
-    public function getOrder(): Order
-    {
-        return $this->Order;
+        return $this->CartItemId;
     }
 
     public function setItem(Item $Item): void
@@ -53,5 +42,15 @@ class OrderedItem {
     public function getQuantity(): int
     {
         return $this->Quantity;
+    }
+
+    public function getCart(): Cart
+    {
+        return $this->Cart;
+    }
+
+    public function setCart(Cart $Cart): void
+    {
+        $this->Cart = $Cart;
     }
 }

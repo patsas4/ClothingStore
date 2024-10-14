@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Service;
-use App\Entities\Item;
-use App\Entities\Category;
-use App\Entities\Fit;
+use App\Entity\Item;
+use App\Entity\Category;
+use App\Entity\Fit;
 class ItemService
 {
     public static function getAllItems($entityManager)
