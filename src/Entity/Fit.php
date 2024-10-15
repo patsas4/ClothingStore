@@ -4,13 +4,14 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name:"Fit")]
+#[ORM\Table(name: "Fit")]
 class Fit {
     #[ORM\Id]
-    #[ORM\GeneratedValue()]
-    #[ORM\Column(type:"integer")]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer", name: "FitId")]
     private int $FitId;
-    #[ORM\Column(type:"string")]
+
+    #[ORM\Column(type: "string", name: "FitType")]
     private string $FitType;
 
     public function getFitId(): int 

@@ -5,18 +5,18 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
-#[ORM\Table(name:"Item")]
+#[ORM\Table(name: "Item")]
 class Item {
 
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: "AUTO")]
-    #[ORM\Column(type:"integer")]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: "integer", name: "ItemId")]
     private int $ItemId;
 
-    #[ORM\Column(type:"string")]
+    #[ORM\Column(type: "string", name: "ItemName")]
     private string $ItemName;
 
-    #[ORM\Column(type:"float")]
+    #[ORM\Column(type: "float", name:"Price")]
     private float $Price;
 
     #[ORM\ManyToOne(targetEntity: Category::class,)]
@@ -24,8 +24,8 @@ class Item {
     private Category $Category;
 
     #[ORM\ManyToOne(targetEntity: Fit::class)]
-    #[ORM\JoinColumn(name:"FitId", referencedColumnName:"FitId")]
-    private Fit $Fit;
+    #[ORM\JoinColumn(name: "FitId", referencedColumnName: "FitId", nullable: true)]
+    private ?Fit $Fit;
 
     public function getItemId(): int 
     {
@@ -47,7 +47,7 @@ class Item {
         return $this->Category;
     }
 
-    public function getFit(): Fit
+    public function getFit(): ?Fit
     {
         return $this->Fit;
     }
@@ -67,7 +67,7 @@ class Item {
         $this->Category = $Category;
     }
 
-    public function setFit(Fit $Fit): void
+    public function setFit(?Fit $Fit): void
     {
         $this->Fit = $Fit;
     }
