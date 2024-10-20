@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 use App\Service\ItemService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,17 +17,15 @@ class ItemController extends AbstractController
     }
 
     #[Route(path:"/getAll", name:"app_itemApi_getAll")]
-    public function getAll(): Response 
+    public function getAll()
     {
        try
        {
-            $data = $this->json(ItemService::getAllItems($this->em));
+            return $this->json(ItemService::getAllItems($this->em));
        }
        catch (\Exception $e)
        {
-            throw new \Exception($e->getMessage(), $e->getCode(), $e);
+            echo $e;
        }
-
-       return $data;
     }
 }

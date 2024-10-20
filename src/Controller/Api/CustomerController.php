@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 class CustomerController extends AbstractController
 {
     #[Route(path:"/", name:"CreateCustomer", methods: ["POST"])]
-    public function createCustomer(string $email, string $name): Response
+    public function createCustomer(string $email, string $name)
     {
 
     }
