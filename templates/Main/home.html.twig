@@ -1,1 +1,18 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}
+    The Storeski
+{% endblock title %}
+
+{% block body %}
+    <center>
+        <div class="homePage_body"> 
+            <h1>Welcome to the Storeski!</h1>
+            <div class="homePage_featured">
+                {% for item in items %}
+                    
+                {% end for %}
+            </div>
+        </div>
+    </center>
+{% endblock body %}

@@ -36,8 +36,7 @@ class MainController extends AbstractController
         }
         catch(\Exception $e)
         {
-            echo $e;
-            return new Response("", Response::HTTP_INTERNAL_SERVER_ERROR);
+            return new Response($e, Response::HTTP_INTERNAL_SERVER_ERROR);
         }        
     }
 
@@ -50,8 +49,7 @@ class MainController extends AbstractController
         }
         catch(\Exception $e)
         {
-            echo $e;
-            return new Response("", Response::HTTP_INTERNAL_SERVER_ERROR);
+            return new Response($e, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
