@@ -9,9 +9,16 @@
         <div class="homePage_body"> 
             <h1>Welcome to the Storeski!</h1>
             <div class="homePage_featured">
+                <h2>
+                    Featured Items!
+                </h2>
                 {% for item in items %}
-                    
-                {% end for %}
+                    <div>
+                        {{ item.Fit.FitType }}
+                        {{ item.ItemName }}
+                        ${{ item.Price }}
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </center>

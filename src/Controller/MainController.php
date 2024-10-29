@@ -1,23 +1,28 @@
 <?php
 
 namespace App\Controller;
+use App\Service\ItemService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\ErrorHandler\ErrorHandler;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Link;
+use Doctrine\ORM\EntityManagerInterface;
 
 class MainController extends AbstractController
 {
+    private EntityManagerInterface $em;
+  
     public $links;
     
-    public function __construct()
+    public function __construct(EntityManagerInterface $em)
     {
         $this->links = [
             new Link("/", "Home"),
             new Link("/products","Products"),
             new Link("/account","Account")
         ];
+        $this->em = $em;
     }
 
     public function filterLinks(string $name)
@@ -32,7 +37,9 @@ class MainController extends AbstractController
     {
         try
         {
-            return $this->render("Main/home.html.twig", ["links" => $this->filterLinks("Home")], response: new Response());
+            $items = ItemService::getAllItems($this->em);
+            $items = array($items[0], $items[1], $items[2], $items[2]);
+            return $this->render("Main/home.html.twig", ["links" => $this->filterLinks("Home"), "items"=>$items], response: new Response());
         }
         catch(\Exception $e)
         {

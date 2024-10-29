@@ -1,3 +1,9 @@
 body {
-    background-color: skyblue;
+    background-color: gray;
+}
+div.base_header {
+    background-color: blanchedalmond;
+}
+div.base_footer {
+    background-color: blanchedalmond;
 }
