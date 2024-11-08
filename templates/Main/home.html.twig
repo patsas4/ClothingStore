@@ -13,11 +13,13 @@
                     Featured Items!
                 </h2>
                 {% for item in items %}
-                    <div>
-                        {{ item.Fit.FitType }}
-                        {{ item.ItemName }}
-                        ${{ item.Price }}
-                    </div>
+                    <a href="item/{{item.ItemId}}">
+                        <div>
+                            {{ item.Fit.FitType }}
+                            {{ item.ItemName }}
+                            ${{ item.Price }}
+                        </div>
+                    </a>
                 {% endfor %}
             </div>
         </div>

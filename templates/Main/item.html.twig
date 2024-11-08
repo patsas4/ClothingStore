@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ item.ItemName }}
+{% endblock title %}
+
+{% block body %}
+    <center>
+        <div class="item_body">
+            <h2>
+                {{ item.Fit.FitType }} {{ item.ItemName }}
+            </h2>
+            <div class="item_image">
+                <img src="../images/{{item.ItemId}}.jpeg" alt="{{item.ItemName}} Pic">
+            </div>
+            <div>
+                <p>
+                    {{ item.Price }}
+                </p>
+                <input type="number" min="1" name="quantity">
+                <button class="cart_add_button" onclick="addToCart()">
+                    Add To Cart
+                </button>                
+            </div>
+        </div>
+    </center>
+    <script>
+        function addToCart() {
+            var quantity = parseInt(document.getElementsByName("quantity"));
+
+            if (!quantity || quantity < 1) {
+                alert("Please enter a valid quantity")
+            }
+        }
+    </script>
+{% endblock %}

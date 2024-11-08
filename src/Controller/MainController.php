@@ -39,7 +39,7 @@ class MainController extends AbstractController
         {
             $items = ItemService::getAllItems($this->em);
             $items = array($items[0], $items[1], $items[2], $items[2]);
-            return $this->render("Main/home.html.twig", ["links" => $this->filterLinks("Home"), "items"=>$items], response: new Response());
+            return $this->render("Main/home.html.twig", ["links" => $this->filterLinks("Home"), "items"=>$items]);
         }
         catch(\Exception $e)
         {
@@ -52,7 +52,21 @@ class MainController extends AbstractController
     {
         try
         {
-            return $this->render("Main/products.html.twig", ["links" => $this->filterLinks("Products")], response: new Response());
+            return $this->render("Main/products.html.twig", ["links" => $this->filterLinks("Products")]);
+        }
+        catch(\Exception $e)
+        {
+            return new Response($e, Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    #[Route(path:"/item/{itemId}", name:"ShowItem", requirements: ["itemId" => "\d+"])]
+    public function ShowItem(int $itemId)
+    {
+        try
+        {
+            $item = ItemService::getItemById($this->em, $itemId);
+            return $this->render("Main/item.html.twig", ["links" => $this->links, "item" => $item]);
         }
         catch(\Exception $e)
         {
