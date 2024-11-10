@@ -73,4 +73,13 @@ class MainController extends AbstractController
             return new Response($e, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
+
+
+
+
+    #[Route('/{path}', name: 'catch_all', requirements: ['path' => '.*'], priority: -1)]
+    public function catchAll(): Response
+    {
+        return new Response('Page Not Found', Response::HTTP_NOT_FOUND);
+    }
 }
