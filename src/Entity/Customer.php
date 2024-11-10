@@ -3,22 +3,23 @@
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity]
 #[ORM\Table(name:"Customer")]
-class Customer implements UserInterface
+class Customer implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue()]
-    #[ORM\Column(type:"integer")]
+    #[ORM\Column(type:"integer", name: 'CustomerId')]
     private int $CustomerId;
-    #[ORM\Column(type:"string")]
+    #[ORM\Column(type:"string", name: 'FirstName')]
     private string $FirstName;
-    #[ORM\Column(type:"string")]
+    #[ORM\Column(type:"string", name: 'LastName')]
     private string $LastName;
-    #[ORM\Column(type:"string")]
+    #[ORM\Column(type:"string", name: 'Email')]
     private string $Email;
-    #[ORM\Column(type:"string")]
+    #[ORM\Column(type:"string", name: 'Password')]
     private string $Password;
 
     private $roles = [];
@@ -83,5 +84,10 @@ class Customer implements UserInterface
     public function getUserIdentifier(): string
     {
         return $this->Email;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 }

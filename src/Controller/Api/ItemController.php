@@ -16,7 +16,7 @@ class ItemController extends AbstractController
         $this->em = $em;
     }
 
-    #[Route(path:"/getAll", name:"app_itemApi_getAll")]
+    #[Route(path:"/getAll", name:"itemApi_getAll")]
     public function getAll()
     {
        try
