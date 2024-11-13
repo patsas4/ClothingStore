@@ -10,18 +10,13 @@ use Symfony\Component\HttpFoundation\Response;
 #[Route(path:"/api/item", name:"itemController")]
 class ItemController extends AbstractController
 {
-    private EntityManagerInterface $em;
-    public function __construct(EntityManagerInterface $em)
-    {
-        $this->em = $em;
-    }
 
     #[Route(path:"/getAll", name:"itemApi_getAll")]
-    public function getAll()
+    public function getAll(EntityManagerInterface $em)
     {
        try
        {
-            return $this->json(ItemService::getAllItems($this->em));
+            return $this->json(ItemService::getAllItems($em));
        }
        catch (\Exception $e)
        {

@@ -17,7 +17,7 @@
                 <p>
                     {{ item.Price }}
                 </p>
-                <input type="number" min="1" name="quantity">
+                <input type="number" min="1" name="quantity" id="quant">
                 <button class="cart_add_button" onclick="addToCart()">
                     Add To Cart
                 </button>                
@@ -26,11 +26,25 @@
     </center>
     <script>
         function addToCart() {
-            var quantity = parseInt(document.getElementsByName("quantity"));
+            var quantity = Number(document.getElementById("quant").value);
 
-            if (!quantity || quantity < 1) {
-                alert("Please enter a valid quantity")
+            if (!quantity || quantity < 1) 
+            {
+                alert("Please enter a valid quantity");
             }
+            else {
+                fetch('/check-login')
+                .then(response => response.json())
+                .then(isLoggedIn => {
+                    if (!isLoggedIn)
+                    {
+                        sessionStorage.setItem('quantity', quantity);
+                        window.location.replace('/login');
+                    }
+                })
+            }
+
+
         }
     </script>
 {% endblock %}
