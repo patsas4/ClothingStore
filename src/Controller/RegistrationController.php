@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Customer;
+use App\Service\CustomerService;
 use App\Form\CustomerType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,8 +33,8 @@ class RegistrationController extends AbstractController
             $customer->setRoles(['ROLE_USER']);
 
             // Save the new user to the database
-            $entityManager->persist($customer);
-            $entityManager->flush();
+            $customerInfo = CustomerService::createCustomer($entityManager, $customer);
+            $request->getSession()->set('customerInfo', $customerInfo);
 
             // Optionally, log the user in immediately after registration
             // return $this->redirectToRoute('app_login');

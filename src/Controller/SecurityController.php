@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Service\CustomerService;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,16 +14,25 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     #[Route(path: '/login', name: 'app_login')]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, EntityManagerInterface $entityManagerInterface): Response
     {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('HomePage');
-        }
+        //if ($this->getUser()) {
+            //return $this->redirectToRoute('HomePage');
+        //}
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
+
+        if($lastUsername && $error)
+        {
+            $customer = CustomerService::getCustomerByEmail($entityManagerInterface, $lastUsername);
+            if (!$customer) 
+            {
+                return $this->redirectToRoute('app_register');
+            }
+        }
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'links' => []]);
     }
@@ -35,12 +46,6 @@ class SecurityController extends AbstractController
     #[Route(path: '/check-login', name: 'check_login')]
     public function checkLogin()
     {
-        if($this->getUser()) {
-            $isLoggedIn = true;
-        }
-
-        $isLoggedIn = false;
-        return $this->json($isLoggedIn);
-
+        return $this->json($this->getUser());
     }
 }
