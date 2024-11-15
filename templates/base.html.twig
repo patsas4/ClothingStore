@@ -17,9 +17,11 @@
             </div>
             <div>
                 <p>
-                    {% for link in links %}                
-                    <a href={{ link.url }}>{{ link.name }}</a>
-                    {% endfor %}
+                    {% if links %}
+                        {% for link in links %}                
+                        <a href={{ link.url }}>{{ link.name }}</a>
+                        {% endfor %}
+                    {% endif %}
                 </p>
             </div>
         </div>
