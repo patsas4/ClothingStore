@@ -18,6 +18,7 @@
                     {{ item.Price }}
                 </p>
                 <input type="number" min="1" name="quantity" id="quant">
+                <input type="number" hidden="true" id="itemId" value="{{item.ItemId}}">
                 <button class="cart_add_button" onclick="addToCart()">
                     Add To Cart
                 </button>                
@@ -41,7 +42,11 @@
                         sessionStorage.setItem('quantity', quantity);
                         window.location.replace('/login');
                     }
-                })
+                    else
+                    {
+                        var itemId = Number(document.getElementById("itemId").value)
+                    }
+                });
             }
 
 
