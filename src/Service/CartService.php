@@ -5,9 +5,9 @@ use App\Entity\Cart;
 use App\Entity\Customer;
 class CartService
 {
-    public static function getCartByCustomerId($entityManager, int $customerId): Cart
+    public static function getCartByCustomerId($entityManager, int $customerId)
     {
-        return $entityManager->getRepository(Cart::class)->find(array("CustomerId"=>$customerId));
+        return $entityManager->getRepository(Cart::class)->findOneBy(array('Customer' => $customerId));
     }
 
     public static function createCart($enitityManager, Customer $customer): Cart

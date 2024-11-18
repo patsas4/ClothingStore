@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 use App\Service\ItemService;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\ErrorHandler\ErrorHandler;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Link;
@@ -33,12 +35,22 @@ class MainController extends AbstractController
     }
 
     #[Route(path:"", name:"HomePage")]
-    public function HomePage() 
+    public function HomePage(Request $request, LoggerInterface $loggerInterface) 
     {
         try
         {
-            $items = ItemService::getAllItems($this->em);
-            $items = array($items[0], $items[1], $items[2], $items[2]);
+            if (!$request->hasSession())
+            {
+                session_start();
+            }
+
+            if(!$items = $request->getSession()->get('featured'))
+            {
+                $items = ItemService::getAllItems($this->em);
+                $items = array($items[0], $items[1], $items[2], $items[2]);
+                $request->getSession()->set('featured', $items);
+            }  
+
             return $this->render("Main/home.html.twig", ["links" => $this->filterLinks("Home"), "items"=>$items]);
         }
         catch(\Exception $e)
@@ -80,6 +92,6 @@ class MainController extends AbstractController
     #[Route('/{path}', name: 'catch_all', requirements: ['path' => '.*'], priority: -1)]
     public function catchAll(): Response
     {
-        return new Response('Page Not Found', Response::HTTP_NOT_FOUND);
+        return $this->render('security/notfound.html.twig', ['links' => $this->links]);
     }
 }
