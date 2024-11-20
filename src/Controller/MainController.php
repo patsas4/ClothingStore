@@ -44,6 +44,11 @@ class MainController extends AbstractController
                 session_start();
             }
 
+            if (!$request->getSession()->get('links'))
+            {
+                $request->getSession()->set('links' , $this->links);
+            }
+
             if(!$items = $request->getSession()->get('featured'))
             {
                 $items = ItemService::getAllItems($this->em);

@@ -1,5 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    
+    <center>
+        <h1>
+            Your Cart
+        </h1>
+        {% if items %}
+            {% for item in items %}
+                
+            {% endfor %}
+        {% endif %}
+    </center>
 {% endblock body %}

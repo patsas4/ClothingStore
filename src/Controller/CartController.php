@@ -26,30 +26,24 @@ class CartController extends AbstractController
                 $request->getSession()->set('redirect','/addToCart');                
                 return new RedirectResponse('/login');
             } 
-            if(!$cart = $request->getSession()->get('cart'))
+            if(!$cartItems = $request->getSession()->get('cart'))
             {
                 $storedItems = CartItemService::getCartItemsByCustomerId($entityManagerInterface, $user->getCustomerId());
-                $cart = $storedItems ?? [];
+                $cartItems = $storedItems ?? [];
             }
             $newItemId = $_POST['itemId'];
             $logger->info($newItemId);
-            $updated = false;
-            foreach ($cart as $item) 
-            {
-                if ($item->getItemId() == $newItemId)
-                {
-                    $item->setQuantity($item->getQuantity() + $_POST['quantity']);
-                    $item = CartItemService::updateItemInCart($entityManagerInterface, $item);
-                    $updated = true;
-                    break;
-                }
-            }    
             
-            if(!$updated)
+            $userCart = CartService::getCartByCustomerId($entityManagerInterface, $user->getCustomerId());
+            $cartItems = CartItemService::addCartItem($entityManagerInterface, $newItemId, $_POST['quantity'], $userCart);
+
+            $request->getSession()->set('cartItems', $cartItems);
+
+            if(!$links = $request->getSession()->get('links'))
             {
-                
+                $links = [];
             }
-            return $this->render('Main/cart.html.twig', ['links' => []]);
+            return $this->render('Main/cart.html.twig', ['links' => $links, 'items' => $cartItems]);
         }
         catch (\Exception $e)
         {
