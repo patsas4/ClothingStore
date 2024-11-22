@@ -71,14 +71,4 @@ class Item {
     {
         $this->Fit = $Fit;
     }
-
-    public function setCategoryId(int $CategoryId): void
-    {
-        $this->CategoryId = $CategoryId;
-    }
-
-    public function setFitId(int $FitId): void
-    {
-        $this->FitId = $FitId;
-    }
 }
