@@ -18,6 +18,7 @@ class CartItemService
             if ($item->getItem()->getItemId() == $itemId)
             {
                 $item->setQuantity($item->getQuantity() + $quantity);
+                $item->setPrice($item->getQuantity() * $item->getPrice());
                 $item = CartItemService::updateItemInCart($entityManager, $item);
                 return $entityManager->getRepository(CartItem::class)->findBy(array('Cart' => $cart));
             }
@@ -27,6 +28,7 @@ class CartItemService
         $cartItem->setCart( $cart );
         $cartItem->setQuantity( $quantity );
         $cartItem->setItem( ItemService::getItemById($entityManager, $itemId));
+        $cartItem->setPrice((float) $quantity * $cartItem->getItem()->getPrice());
 
         $entityManager->persist($cartItem);
         $entityManager->flush();
@@ -56,5 +58,19 @@ class CartItemService
     public static function getByCartItemId(EntityManagerInterface $entityManager, int $cartItemId)
     {
         return $entityManager->getRepository(CartItem::class)->find($cartItemId);
+    }
+
+    public static function deleteCartItem(EntityManagerInterface $entityManagerInterface, int $customerId, int $itemId)
+    {
+        $cart = CartService::getCartByCustomerId($entityManagerInterface, $customerId);
+        $cartItem = CartItemService::getByCartandItemId($entityManagerInterface, $cart, $itemId);
+        $entityManagerInterface->remove($cartItem);
+        $entityManagerInterface->flush();
+        return;
+    }
+
+    public static function getByCartandItemId(EntityManagerInterface $entityManagerInterface, Cart $cart, $itemId)
+    {
+        return $entityManagerInterface->getRepository(CartItem::class)->findOneBy(array('Cart' => $cart->getCartId(), 'Item' => $itemId));
     }
 }

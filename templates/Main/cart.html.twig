@@ -7,36 +7,52 @@
         </h1>
         {% if items %}
             <div>
-                <table>
+                <table style="border: 1px solid black;">
                     <thead>
                         <tr>
-                            <th>
+                            <th style="padding: 10px;">
                                 Item Name
                             </th>
-                            <th>
+                            <th style="padding: 10px;">
                                 Quantity
                             </th>
-                            <th>
+                            <th style="padding: 10px;">
                                 Price
                             </th>
                         </tr>                        
                     </thead>
                     <tbody>
                         {% for item in items %}
-                            <tr>
-                                <td>
-                                    {{ item.Item.Fit.FitType item.Item.ItemName }}
-                                </td>
-                                <td>
-                                    {{ item.Quantity }}
-                                </td>
-                                <td>
-                                    {{ item.Price }}
-                                </td>
-                            </tr>
+                            <form action="/delete" method="post">
+                                <input type="hidden" name="itemId" value="{{item.Item.ItemId}}">
+                                <tr>
+                                    <td style="padding: 10px; border: 1px solid black;">
+                                        {{ item.Item.Fit.FitType }} {{ item.Item.ItemName }}
+                                    </td>
+                                    <td style="padding: 10px; border: 1px solid black;">
+                                        {{ item.Quantity }}
+                                    </td>
+                                    <td style="padding: 10px; border: 1px solid black;">
+                                        ${{ item.Price }}
+                                    </td>
+                                    <td style="padding: 10px; border: 1px solid black;">
+                                        <button type="submit">Remove</button>
+                                    </td>
+                                </tr>
+                            </form>
                         {% endfor %}                        
                     </tbody>
                 </table>
+                <div>
+                    <h2>
+                        Total: ${{ total }}
+                    </h2>
+                </div>
+                <div>
+                    <form action="/order" method="post">
+                        <button type="submit">Submit Order</button>
+                    </form>
+                </div>
             </div>            
         {% endif %}
     </center>

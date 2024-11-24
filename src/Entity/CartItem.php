@@ -18,6 +18,7 @@ class CartItem {
     private Item $Item;
     #[ORM\Column(type:"integer", name:'Quantity')]
     private int $Quantity;
+    #[ORM\Column(type:"float", name:'Price')]
     private float $Price; 
 
     public function getCartItemId(): int 

@@ -22,7 +22,8 @@ class MainController extends AbstractController
         $this->links = [
             new Link("/", "Home"),
             new Link("/products","Products"),
-            new Link("/account","Account")
+            new Link("/account","Account"),
+            new Link("/cart","Cart")
         ];
         $this->em = $em;
     }
