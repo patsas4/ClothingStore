@@ -66,7 +66,8 @@ GO
 CREATE TABLE [dbo].[Order](
 	[OrderId] [int] IDENTITY(1,1) NOT NULL,
 	[CustomerId] [int] NOT NULL,
-	[DateOrdered] [DateTime] NOT NULL
+	[DateOrdered] [datetime2] NOT NULL,
+	[Total] [money] NULL
  CONSTRAINT [PK_Order_OrderId] PRIMARY KEY CLUSTERED 
 (
 	[OrderId] ASC
@@ -82,7 +83,8 @@ CREATE TABLE [dbo].[OrderedItem](
 	[OrderedItemId] [int] IDENTITY(1,1) NOT NULL,
 	[OrderId] [int] NOT NULL,
 	[ItemId] [int] NOT NULL,
-	[Quantity] [int] NOT NULL
+	[Quantity] [int] NOT NULL,
+	[Price] [money] NOT NULL
  CONSTRAINT [PK_OrderedItem_OrderedItemId] PRIMARY KEY CLUSTERED
  (
 	[OrderedItemId] ASC

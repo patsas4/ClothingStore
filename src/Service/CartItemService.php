@@ -2,6 +2,7 @@
 
 namespace App\Service;
 use App\Entity\Cart;
+use App\Entity\Customer;
 use App\Entity\Item;
 use App\Entity\CartItem;
 use Psr\Log\LoggerInterface;
@@ -72,5 +73,17 @@ class CartItemService
     public static function getByCartandItemId(EntityManagerInterface $entityManagerInterface, Cart $cart, $itemId)
     {
         return $entityManagerInterface->getRepository(CartItem::class)->findOneBy(array('Cart' => $cart->getCartId(), 'Item' => $itemId));
+    }
+
+    public static function removeItemsOrdered(EntityManagerInterface $enitityManager, Customer $customer)
+    {
+        $cartItems = CartItemService::getCartItemsByCustomerId($enitityManager, $customer->getCustomerId());
+        foreach ($cartItems as $cartItem)
+        {
+            $enitityManager->remove($cartItem);
+        }
+
+        $enitityManager->flush();
+        return;
     }
 }

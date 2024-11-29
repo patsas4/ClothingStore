@@ -9,16 +9,18 @@ use Doctrine\ORM\Mapping as ORM;
 class OrderedItem {
     #[ORM\Id]
     #[ORM\GeneratedValue()]
-    #[ORM\Column(type:"integer")]
+    #[ORM\Column(type:"integer", name:'OrderedItemId')]
     private int $OrderedItemId;
-    #[ORM\ManyToOne(targetEntity: Order::class)]
+    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'OrderedItems')]
     #[ORM\JoinColumn(name: "OrderId", referencedColumnName:"OrderId")]
     private Order $Order;
     #[ORM\ManyToOne(targetEntity: Item::class)]
     #[ORM\JoinColumn(name: "ItemId", referencedColumnName:"ItemId")]
     private Item $Item;
-    #[ORM\Column(type:"integer")]
+    #[ORM\Column(type:"integer", name:'Quantity')]
     private int $Quantity;
+    #[ORM\Column(type:"float", name:'Price')]
+    private float $Price;
 
     public function getOrderedItemId(): int 
     {
@@ -53,5 +55,15 @@ class OrderedItem {
     public function getQuantity(): int
     {
         return $this->Quantity;
+    }
+
+    public function getPrice()
+    {
+        return $this->Price;
+    }
+
+    public function setPrice(float $price)
+    {
+        $this->Price = $price;
     }
 }
