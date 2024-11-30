@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: "Category")]
 class Category {
 
+    public const None = 9;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type:"integer", name: "CategoryId")]

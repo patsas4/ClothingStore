@@ -23,7 +23,8 @@ class MainController extends AbstractController
             new Link("/", "Home"),
             new Link("/products","Products"),
             new Link("/account","Account"),
-            new Link("/cart","Cart")
+            new Link("/cart","Cart"),
+            new Link('/show_order', 'Orders')
         ];
         $this->em = $em;
     }
@@ -63,20 +64,7 @@ class MainController extends AbstractController
         {
             return new Response($e, Response::HTTP_INTERNAL_SERVER_ERROR);
         }        
-    }
-
-    #[Route(path:"/products", name:"Products")]
-    public function ProductsPage()
-    {
-        try
-        {
-            return $this->render("Main/products.html.twig", ["links" => $this->filterLinks("Products")]);
-        }
-        catch(\Exception $e)
-        {
-            return new Response($e, Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
-    }
+    }    
 
     #[Route(path:"/item/{itemId}", name:"ShowItem", requirements: ["itemId" => "\d+"])]
     public function ShowItem(int $itemId)

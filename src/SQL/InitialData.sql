@@ -34,6 +34,10 @@ IF NOT EXISTS (SELECT * FROM Category WHERE CategoryName = 'Jacket') --8
 	INSERT INTO [dbo].[Category] ([CategoryName])
 	VALUES ('Jacket')
 
+IF NOT EXISTS (SELECT * FROM Category WHERE CategoryName = 'None') -- 9
+	INSERT INTO [dbo].[Category] ([CategoryName])
+	VALUES ('None')
+
 -- Insert into Fit ###############################################################
 PRINT ''
 PRINT 'Initial Insert Into Fit'

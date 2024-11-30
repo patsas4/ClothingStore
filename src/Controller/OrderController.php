@@ -37,7 +37,7 @@ class OrderController extends AbstractController
         {
             if(!$user = $this->getUser())
             {
-                $request->getSession()->set('redirect','/cart');                
+                $request->getSession()->set('redirect','/show_order');                
                 return new RedirectResponse('/login');
             }
 
