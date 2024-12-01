@@ -26,6 +26,8 @@ class Item {
     #[ORM\ManyToOne(targetEntity: Fit::class)]
     #[ORM\JoinColumn(name: "FitId", referencedColumnName: "FitId", nullable: true)]
     private ?Fit $Fit;
+    #[ORM\Column(name: 'ImagePath', type:'string')]
+    private string $ImagePath;
 
     public function getItemId(): int 
     {
@@ -70,5 +72,15 @@ class Item {
     public function setFit(?Fit $Fit): void
     {
         $this->Fit = $Fit;
+    }
+
+    public function getImagePath()
+    {
+        return $this->ImagePath;
+    }
+
+    public function setImagePath(string $imagePath)
+    {
+        $this->ImagePath = $imagePath;  
     }
 }

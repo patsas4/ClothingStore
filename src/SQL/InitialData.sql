@@ -63,67 +63,65 @@ PRINT ''
 PRINT 'Insert Into Item'
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Running Shorts')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Running Shorts', 1, 4, 8.99)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Running Shorts', 1, 4, 8.99, '24.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Slim Running Shorts')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Slim Running Shorts', 1, 1, 7.99)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Slim Running Shorts', 1, 1, 7.99, '25.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Plain Tshirt')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Plain Tshirt', 2, 4, 15.99)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Plain Tshirt', 2, 4, 15.99, 'plain_t.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Graphic Tshirt')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Graphic Tshirt', 2, 3, 20.00)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Graphic Tshirt', 2, 3, 20.00, 'graphic_t.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Cargo Pants')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Cargo Pants', 3, 3, 22.00)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Cargo Pants', 3, 3, 22.00, 'cargo_pants.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Jeans')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Jeans', 3, 4, 56.00)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Jeans', 3, 4, 56.00, 'jeans.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Tye Dye Sweatshirt')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Tye Dye Sweatshirt', 4, 3, 45.50)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Tye Dye Sweatshirt', 4, 3, 45.50, 'tie_dye_sweatshirt.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Sweater')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Sweater', 4, 4, 36.00)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Sweater', 4, 4, 36.00, 'sweater.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'High Socks')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('High Socks', 5, 4, 12.00)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('High Socks', 5, 4, 12.00, 'high_socks.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Low Socks')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Low Socks', 5, 4, 10.00)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Low Socks', 5, 4, 10.00, 'low_socks.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Joggers')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Joggers', 6, 4, 28.00)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Joggers', 6, 4, 28.00, 'joggers.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Sweatpants')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Sweatpants', 6, 3, 28.00)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Sweatpants', 6, 3, 28.00, 'sweatpants.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Baseball Hat')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Baseball Hat', 7, 4, 15.00)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Baseball Hat', 7, 4, 15.00, 'baseball_hat.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Beanie')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Beanie', 7, 4, 12.00)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Beanie', 7, 4, 12.00, 'beanie.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Light Jacket')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Light Jacket', 8, 4, 12.00)
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Light Jacket', 8, 4, 12.00, 'light_jacket.jpg')
 
 IF NOT EXISTS (SELECT * FROM Item WHERE ItemName = 'Rain Jacket')
-	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price])
-	VALUES ('Rain Jacket', 8, 2, 12.00)
-
-	
+	INSERT INTO [dbo].[Item] ([ItemName], [CategoryId], [FitId], [Price], [ImagePath])
+	VALUES ('Rain Jacket', 8, 2, 12.00, 'rain_jacket.jpg')

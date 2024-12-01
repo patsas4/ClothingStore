@@ -27,6 +27,7 @@ CREATE TABLE [dbo].[Item](
 	[Price] [money] NOT NULL,
 	[CategoryId] [int] NOT NULL,
 	[FitId] [int] NULL,
+	[ImagePath] [nvarchar](50) NULL
  CONSTRAINT [PK_Item_ItemId] PRIMARY KEY CLUSTERED 
 (
 	[ItemId] ASC

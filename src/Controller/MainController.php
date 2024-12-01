@@ -13,20 +13,16 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class MainController extends AbstractController
 {
-    private EntityManagerInterface $em;
-  
     public $links;
     
-    public function __construct(EntityManagerInterface $em)
+    public function __construct()
     {
         $this->links = [
             new Link("/", "Home"),
             new Link("/products","Products"),
-            new Link("/account","Account"),
             new Link("/cart","Cart"),
             new Link('/show_order', 'Orders')
         ];
-        $this->em = $em;
     }
 
     public function filterLinks(string $name)
@@ -37,7 +33,7 @@ class MainController extends AbstractController
     }
 
     #[Route(path:"", name:"HomePage")]
-    public function HomePage(Request $request, LoggerInterface $loggerInterface) 
+    public function HomePage(Request $request, EntityManagerInterface $em) 
     {
         try
         {
@@ -46,19 +42,13 @@ class MainController extends AbstractController
                 session_start();
             }
 
-            if (!$request->getSession()->get('links'))
-            {
-                $request->getSession()->set('links' , $this->links);
-            }
+            $request->getSession()->set('links' , $this->links);
 
-            if(!$items = $request->getSession()->get('featured'))
-            {
-                $items = ItemService::getAllItems($this->em);
-                $items = array($items[0], $items[1], $items[2], $items[2]);
-                $request->getSession()->set('featured', $items);
-            }  
+            $items = ItemService::getAllItems($em);
+            $items = array($items[0], $items[1], $items[2], $items[3]);
+            $request->getSession()->set('featured', $items);
 
-            return $this->render("Main/home.html.twig", ["links" => $this->filterLinks("Home"), "items"=>$items]);
+            return $this->render("Main/home.html.twig", ["links" => $this->filterLinks("Home"), "items" => $items]);
         }
         catch(\Exception $e)
         {
@@ -67,11 +57,11 @@ class MainController extends AbstractController
     }    
 
     #[Route(path:"/item/{itemId}", name:"ShowItem", requirements: ["itemId" => "\d+"])]
-    public function ShowItem(int $itemId)
+    public function ShowItem(EntityManagerInterface $em, int $itemId)
     {
         try
         {
-            $item = ItemService::getItemById($this->em, $itemId);
+            $item = ItemService::getItemById($em, $itemId);
             return $this->render("Main/item.html.twig", ["links" => $this->links, "item" => $item]);
         }
         catch(\Exception $e)
