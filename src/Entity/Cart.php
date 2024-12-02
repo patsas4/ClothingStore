@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Cart {
     #[ORM\Id]
     #[ORM\GeneratedValue()]
-    #[ORM\Column(type:"integer")]
+    #[ORM\Column(type:"integer", name:'CartId')]
     private int $CartId;
     #[ORM\ManyToOne(targetEntity: Customer::class)]
     #[ORM\JoinColumn(name:"CustomerId", referencedColumnName:"CustomerId")]

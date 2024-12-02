@@ -1,0 +1,20 @@
+{# templates/registration/register.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <h1>Register</h1>
+
+    {{ form_start(registrationForm) }}
+        {% if lastUserName %}
+            {{ form_row(registrationForm.email, {'value' : lastUserName }) }}
+        {% else %}
+            {{ form_row(registrationForm.email) }}
+        {% endif %}
+        {{ form_row(registrationForm.password) }}
+        {{ form_row(registrationForm.firstName) }}
+        {{ form_row(registrationForm.lastName) }}
+        <button class="btn">Register</button>
+    {{ form_end(registrationForm) }}
+{% endblock %}

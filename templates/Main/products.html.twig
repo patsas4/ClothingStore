@@ -1,1 +1,50 @@
 {% extends 'base.html.twig' %}
+
+{% block title %}
+    Everything!
+{% endblock title %}
+
+{% block body %}
+<center>
+    <div>
+        <form action="/filter_products" method="post">
+            <select name="category" id="category">
+                {% for category in categories %}
+                    {% if selectedCategoryId %}
+                        {% if selectedCategoryId == category.CategoryId %}
+                            <option value="{{ category.CategoryId }}" selected>{{ category.CategoryName }}</option>
+                        {% else %}
+                            <option value="{{ category.CategoryId }}">{{ category.CategoryName }}</option>
+                        {% endif %}
+                    {% else %}
+                        <option value="{{ category.CategoryId }}">{{ category.CategoryName }}</option>
+                    {% endif %}                    
+                {% endfor %}
+            </select>
+            <select name="price" id="price">
+                {% for price_range in price_ranges %}
+                    <option value="{{ price_range.Id }}">{{ price_range.Value }}</option>
+                {% endfor %}
+            </select>
+            <div>
+                <button type="submit">Filter</button>
+            </div>
+        </form>
+    </div>
+    <div>
+        {% for item in items %}
+            <a href="item/{{item.ItemId}}">
+                <div>
+                    <p>{{ item.Fit.FitType }} {{ item.ItemName }}</p>                            
+                    <div>
+                        <img style="max-height: 300px;" src="/images/{{item.ImagePath}}" alt="{{item.ItemName}} Pic">
+                    </div>
+                    <p>
+                        ${{ item.Price }}
+                    </p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</center>
+{% endblock body %}

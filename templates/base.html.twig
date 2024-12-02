@@ -17,9 +17,11 @@
             </div>
             <div>
                 <p>
-                    {% for link in links %}                
-                    <a href={{ link.url }}>{{ link.name }}</a>
-                    {% endfor %}
+                    {% if links %}
+                        {% for link in links %}                
+                        <a href={{ link.url }}>{{ link.name }}</a>
+                        {% endfor %}
+                    {% endif %}
                 </p>
             </div>
         </div>
@@ -29,11 +31,13 @@
     </body>
     <footer>
         <div class="base_footer">
-            <div class="info">
-                <p>
-                    CopyRight Petros Atsas
-                </p>
-            </div>
+            <center>
+                <div class="info">
+                    <p>
+                        CopyRight Petros Atsas
+                    </p>
+                </div>
+            </center>
         </div>
     </footer>
 </html>
