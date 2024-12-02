@@ -17,22 +17,39 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class CartController extends AbstractController
 {
-    #[Route('/addToCart', methods:['post'], name:'add_to_cart')]
+    #[Route('/addToCart', name:'add_to_cart')]
     public function addToCart(Request $request, EntityManagerInterface $entityManagerInterface, LoggerInterface $logger)
     {
         try
         {
             if(!$user = $this->getUser())
             {
-                $request->getSession()->set('redirect','/addToCart');                
+                $request->getSession()->set('redirect','/addToCart');    
+                $request->getSession()->set('newItemId', $_POST['itemId']);            
+                $request->getSession()->set('quantity', $_POST['quantity']);            
                 return new RedirectResponse('/login');
             } 
             
             $cartItems = CartItemService::getCartItemsByCustomerId($entityManagerInterface, $user->getCustomerId());
-            $newItemId = $_POST['itemId'];
+            if (!$newItemId = $request->getSession()->get('newItemId'))
+            {
+                $newItemId = $_POST['itemId'];
+            }
+            else
+            {
+                $request->getSession()->remove('newItemId');
+            }
+            if (!$quantity = $request->getSession()->get('quantity'))
+            {
+                $quantity = $_POST['quantity'];
+            }
+            else
+            {
+                $request->getSession()->remove('quantity');
+            }
             
             $userCart = CartService::getCartByCustomerId($entityManagerInterface, $user->getCustomerId());
-            $cartItems = CartItemService::addCartItem($entityManagerInterface, $newItemId, $_POST['quantity'], $userCart);
+            $cartItems = CartItemService::addCartItem($entityManagerInterface, $newItemId, $quantity, $userCart);
 
             $request->getSession()->set('cartItems', $cartItems);
 

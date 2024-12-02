@@ -21,7 +21,8 @@ class MainController extends AbstractController
             new Link("/", "Home"),
             new Link("/products","Products"),
             new Link("/cart","Cart"),
-            new Link('/show_order', 'Orders')
+            new Link('/show_order', 'Orders'),
+            new Link('/login', 'Login')
         ];
     }
 
